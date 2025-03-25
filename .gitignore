@@ -18,4 +18,4 @@ obj/
 **/node_modules/
 
 # Ignorar arquivos do ambiente local
-appsettings*.json
+appsettings.Development.json
