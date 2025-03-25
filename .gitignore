@@ -16,3 +16,6 @@ bin/
 obj/
 *.pdb
 **/node_modules/
+
+# Ignorar arquivos do ambiente local
+appsettings*.json
