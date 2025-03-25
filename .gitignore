@@ -1,0 +1,21 @@
+# Ignorar arquivos do Visual Studio
+.vs/
+*.user
+*.suo
+*.cache
+*.log
+*.csproj.user
+*.db
+
+# Ignorar arquivos do GitHub e logs
+.github/
+.git/
+
+# Ignorar builds e dependências do .NET
+bin/
+obj/
+*.pdb
+**/node_modules/
+
+# Ignorar arquivos do ambiente local
+appsettings*.json
