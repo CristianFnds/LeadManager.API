@@ -9,6 +9,7 @@ namespace LeadManager.Domain.Interfaces
         Task<Lead> GetByIdAsync(int id);
         Task AddAsync(Lead invited);
         Task UpdateAsync(Lead invited);
+        Task LeadAccept(Lead lead);
         Task DeleteAsync(int id);
     }
 }

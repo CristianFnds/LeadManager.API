@@ -20,7 +20,7 @@ namespace LeadManager.Infrastructure.Repositories
         }
         public async Task<IEnumerable<Lead>> GetAllInvitedAsync()
         {
-            return await _context.Leads.Include(l => l.Contact).ToListAsync();
+            return await _context.Leads.Include(l => l.Contact).Where(l => l.IsAccepted == null).ToListAsync();
         }
 
         public async Task<Lead> GetByIdAsync(int id)
@@ -35,6 +35,12 @@ namespace LeadManager.Infrastructure.Repositories
         }
 
         public async Task UpdateAsync(Lead lead)
+        {
+            _context.Leads.Update(lead);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task LeadAccept(Lead lead)
         {
             _context.Leads.Update(lead);
             await _context.SaveChangesAsync();

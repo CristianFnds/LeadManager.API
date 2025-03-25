@@ -13,7 +13,7 @@ namespace LeadManager.Infrastructure.Configurations
             builder.HasKey(l => l.Id);
 
             builder.Property(l => l.ContactId)
-              .HasColumnName("contact_id");
+                .HasColumnName("contact_id");
 
             builder.Property(l => l.Suburb)
                 .HasMaxLength(100);
@@ -25,14 +25,15 @@ namespace LeadManager.Infrastructure.Configurations
                 .HasMaxLength(500);
 
             builder.Property(l => l.Price)
-                .HasPrecision(10, 2);
+                .HasColumnType("DECIMAL(10,2)");
 
             builder.Property(l => l.IsAccepted)
-            .HasDefaultValue(null);
+                .HasDefaultValue(null);
 
             builder.Property(l => l.DateCreated)
                 .HasColumnName("created_at")
-                .HasPrecision(10, 2);
+                .HasColumnType("datetime2(7)") // Escala válida no SQL Server
+            .HasDefaultValueSql("GETDATE()"); // Valor padrão no SQL Server
 
             builder.HasOne(l => l.Contact)
                .WithMany(c => c.Leads)

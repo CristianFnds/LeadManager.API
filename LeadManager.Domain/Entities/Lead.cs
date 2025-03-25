@@ -17,5 +17,24 @@ namespace LeadManager.Domain.Entities
         public DateTime DateCreated { get; set; }
         public bool? IsAccepted { get; set; }
         public Contact Contact { get; set; }
+
+        public void Accept()
+        {
+            if (IsAccepted != null)
+            {
+                throw new InvalidOperationException("The lead has already been answered.");
+            }
+            IsAccepted = true;
+        }
+
+        public void Reject()
+        {
+            if (IsAccepted != null)
+            {
+                throw new InvalidOperationException("The lead has already been answered.");
+            }
+
+            IsAccepted = false;
+        }
     }
 }

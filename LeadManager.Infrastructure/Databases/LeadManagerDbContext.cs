@@ -1,5 +1,6 @@
 ﻿using LeadManager.Domain.Entities;
 using LeadManager.Infrastructure.Configurations;
+using LeadManager.Infrastructure.Data.Seeds;
 using Microsoft.EntityFrameworkCore;
 
 namespace LeadManager.Infrastructure.Databases
@@ -20,6 +21,9 @@ namespace LeadManager.Infrastructure.Databases
 
             modelBuilder.ApplyConfiguration(new LeadConfigurations());
             modelBuilder.ApplyConfiguration(new ContactConfigurations());
+
+            modelBuilder.ApplyConfiguration(new ContactSeed());
+            modelBuilder.ApplyConfiguration(new LeadSeed());
         }
     }
 }
