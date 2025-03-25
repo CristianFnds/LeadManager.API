@@ -27,6 +27,9 @@ namespace LeadManager.Infrastructure.Configurations
             builder.Property(l => l.Price)
                 .HasPrecision(10, 2);
 
+            builder.Property(l => l.IsAccepted)
+            .HasDefaultValue(null);
+
             builder.Property(l => l.DateCreated)
                 .HasColumnName("created_at")
                 .HasPrecision(10, 2);

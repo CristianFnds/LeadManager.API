@@ -18,6 +18,10 @@ namespace LeadManager.Infrastructure.Repositories
         {
             return await _context.Leads.Include(l => l.Contact).ToListAsync();
         }
+        public async Task<IEnumerable<Lead>> GetAllInvitedAsync()
+        {
+            return await _context.Leads.Include(l => l.Contact).ToListAsync();
+        }
 
         public async Task<Lead> GetByIdAsync(int id)
         {

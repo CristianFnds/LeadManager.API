@@ -25,6 +25,13 @@ namespace LeadManager.API.Controllers
             return Ok(inviteds);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAllInvited()
+        {
+            var inviteds = await _invitedService.GetAllInvitedAsync();
+            return Ok(inviteds);
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {

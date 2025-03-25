@@ -18,6 +18,11 @@ namespace LeadManager.Application.Service
             return await _invitedRepository.GetAllAsync();
         }
 
+        public async Task<IEnumerable<Lead>> GetAllInvitedAsync()
+        {
+            return await _invitedRepository.GetAllInvitedAsync();
+        }
+
         public async Task<Lead> GetByIdAsync(int id)
         {
             return await _invitedRepository.GetByIdAsync(id);
