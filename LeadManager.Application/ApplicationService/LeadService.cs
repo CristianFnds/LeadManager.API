@@ -1,17 +1,20 @@
 ﻿using LeadManager.Application.Interfaces;
 using LeadManager.Domain.Entities;
 using LeadManager.Domain.Interfaces;
-using SendGrid.Helpers.Errors.Model;
 
-namespace LeadManager.Application.Service
+namespace LeadManager.Application.ApplicationService
 {
     public class LeadService : ILeadService
     {
         private readonly ILeadRepository _leadRepository;
+        private readonly IEmailService _emailService;
 
-        public LeadService(ILeadRepository invitedRepository)
+        private const string emailVendas = "vendas@teste.com";
+
+        public LeadService(ILeadRepository invitedRepository, IEmailService emailService)
         {
             _leadRepository = invitedRepository;
+            _emailService = emailService;
         }
 
         public async Task<IEnumerable<Lead>> GetAllAsync()
@@ -22,6 +25,10 @@ namespace LeadManager.Application.Service
         public async Task<IEnumerable<Lead>> GetAllInvitedAsync()
         {
             return await _leadRepository.GetAllInvitedAsync();
+        }
+        public async Task<IEnumerable<Lead>> GetAllAcceptedsAsync()
+        {
+            return await _leadRepository.GetAllAcceptedsAsync();
         }
 
         public async Task<Lead> GetByIdAsync(int id)
@@ -39,29 +46,24 @@ namespace LeadManager.Application.Service
             await _leadRepository.UpdateAsync(invited);
         }
 
-        public async Task<Lead> AcceptLeadAsync(int id)
+        public async Task<Lead> AcceptLeadAsync(Lead lead)
         {
-            var lead = await _leadRepository.GetByIdAsync(id);
-            if (lead == null)
+            if (lead.Price > 500)
             {
-                throw new NotFoundException("Lead not found.");
+                lead.Price = lead.Price * 0.9m;
             }
 
             lead.Accept();
 
             await _leadRepository.UpdateAsync(lead);
 
+            await _emailService.SendEmailAsync(emailVendas, "Lead Accepted", "Hello");
+
             return lead;
         }
 
-        public async Task<Lead> RejectLeadAsync(int id)
+        public async Task<Lead> RejectLeadAsync(Lead lead)
         {
-            var lead = await _leadRepository.GetByIdAsync(id);
-            if (lead == null)
-            {
-                throw new NotFoundException("Lead not found.");
-            }
-
             lead.Reject();
 
             await _leadRepository.UpdateAsync(lead);

@@ -11,4 +11,35 @@ dotnet ef database update --startup-project LeadManager.API --project LeadManage
 //criar seeds
 dotnet ef migrations add AddSeedData --startup-project LeadManager.API --project LeadManager.Infrastructure
 
-//Subi as seeds para o banco 
+//Subi as seeds para o banco
+ dotnet ef database update --startup-project LeadManager.API --project LeadManager.Infrastructure
+
+
+
+
+
+api
+  Controler
+    LeadsController
+  program.cs
+application
+    DTO
+        LeadDto-- verificar se esta sendo usando
+    interfaces
+        ILeadService
+    Service 
+        LeadService
+Domain
+    Entities
+        Lead.cs
+        Contact.cs
+    Interfaces
+        IEmailService
+        ILeadrepository
+Infrastructure 
+    Configurations
+        ContactConfigurations
+        LeadConfigurations
+    Data
+    Migration
+    Repositories

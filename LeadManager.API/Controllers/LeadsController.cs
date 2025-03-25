@@ -32,6 +32,13 @@ namespace LeadManager.API.Controllers
             return Ok(inviteds);
         }
 
+        [HttpGet("accepteds")]
+        public async Task<IActionResult> GetAllAccepteds()
+        {
+            var inviteds = await _leadService.GetAllAcceptedsAsync();
+            return Ok(inviteds);
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -65,15 +72,31 @@ namespace LeadManager.API.Controllers
         [HttpPut("{id}/accept")]
         public async Task<IActionResult> AcceptLead(int id)
         {
-            var lead = await _leadService.AcceptLeadAsync(id);
-            return Ok(lead);
+            var lead = await _leadService.GetByIdAsync(id);
+
+            if (lead == null)
+            {
+                return NotFound();
+            }
+
+            await _leadService.AcceptLeadAsync(lead);
+
+            return NoContent();
         }
 
         [HttpPut("{id}/reject")]
         public async Task<IActionResult> RejectLead(int id)
         {
-            var lead = await _leadService.RejectLeadAsync(id);
-            return Ok(lead);
+            var lead = await _leadService.GetByIdAsync(id);
+
+            if (lead == null)
+            {
+                return NotFound();
+            }
+
+            await _leadService.RejectLeadAsync(lead);
+
+            return NoContent();
         }
 
         [HttpDelete("{id}")]

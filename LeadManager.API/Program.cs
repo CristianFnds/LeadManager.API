@@ -1,15 +1,17 @@
 using LeadManager.Application.Interfaces;
-using LeadManager.Application.Service;
+using LeadManager.Application.ApplicationService;
 using LeadManager.Domain.Interfaces;
 using LeadManager.Infrastructure.Databases;
 using LeadManager.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using LeadManager.Infrastructure.EmailService;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<LeadManagerDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<ILeadRepository, LeadRepository>();
 builder.Services.AddScoped<ILeadService, LeadService>();
 

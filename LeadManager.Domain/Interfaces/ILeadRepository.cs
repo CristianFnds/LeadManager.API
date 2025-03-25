@@ -6,9 +6,10 @@ namespace LeadManager.Domain.Interfaces
     {
         Task<IEnumerable<Lead>> GetAllAsync();
         Task<IEnumerable<Lead>> GetAllInvitedAsync();
+        Task<IEnumerable<Lead>> GetAllAcceptedsAsync();
         Task<Lead> GetByIdAsync(int id);
-        Task AddAsync(Lead invited);
-        Task UpdateAsync(Lead invited);
+        Task AddAsync(Lead lead);
+        Task UpdateAsync(Lead lead);
         Task LeadAccept(Lead lead);
         Task DeleteAsync(int id);
     }
