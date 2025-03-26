@@ -110,7 +110,9 @@ Para rodar este projeto localmente, você precisa de:
     dotnet restore
     ```
 
-4. Se você ainda não configurou o banco de dados, execute as migrações com seeds:
+4. Ajuste a connection string no arquivo appsettings
+
+5. Se você ainda não configurou o banco de dados, execute as migrações com seeds:
 
     ```bash
     dotnet ef database update --startup-project LeadManager.API --project LeadManager.Infrastructure
