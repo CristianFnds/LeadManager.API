@@ -3,6 +3,10 @@
 
 O **Lead Manager Backend** é uma API desenvolvida utilizando o framework **ASP.NET Core** e segue a arquitetura **DDD (Design Driven Development)** para gerenciar leads, com funcionalidades como aceitação de leads, recusa e envio de e-mails. O projeto também usa **Entity Framework Core** para interação com o banco de dados.
 
+**Event Sourcing** 
+
+A funcionalidade de Event Sourcing foi implementada na branch feature/EventSourcing. Event Sourcing permite o armazenamento e a reconstrução do estado de um lead com base nos eventos que ocorreram, permitindo rastrear todas as mudanças de estado de forma granular. Se você deseja explorar essa funcionalidade, basta verificar a referida branch.
+
 ## Tecnologias
 
 - **Entity Framework Core**
