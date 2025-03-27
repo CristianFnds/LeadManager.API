@@ -12,17 +12,17 @@ namespace LeadManager.API.Controllers
         private readonly ILeadService _leadService;
         private readonly ILogger<LeadsController> _logger;
 
-        public LeadsController(ILeadService invitedService, ILogger<LeadsController> logger)
+        public LeadsController(ILeadService leadService, ILogger<LeadsController> logger)
         {
-            _leadService = invitedService;
+            _leadService = leadService;
             _logger = logger;
         }
 
         [HttpGet("all")]
         public async Task<IActionResult> GetAll()
         {
-            var inviteds = await _leadService.GetAllAsync();
-            return Ok(inviteds);
+            var leads = await _leadService.GetAllAsync();
+            return Ok(leads);
         }
 
         [HttpGet("inviteds")]
@@ -35,37 +35,37 @@ namespace LeadManager.API.Controllers
         [HttpGet("accepteds")]
         public async Task<IActionResult> GetAllAccepteds()
         {
-            var inviteds = await _leadService.GetAllAcceptedsAsync();
-            return Ok(inviteds);
+            var accepteds = await _leadService.GetAllAcceptedsAsync();
+            return Ok(accepteds);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var invited = await _leadService.GetByIdAsync(id);
-            if (invited == null)
+            var lead = await _leadService.GetByIdAsync(id);
+            if (lead == null)
                 return NotFound();
 
-            return Ok(invited);
+            return Ok(lead);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] Lead invited)
+        public async Task<IActionResult> Create([FromBody] Lead lead)
         {
-            if (invited == null)
+            if (lead == null)
                 return BadRequest();
 
-            await _leadService.AddAsync(invited);
-            return CreatedAtAction(nameof(GetById), new { id = invited.Id }, invited);
+            await _leadService.AddAsync(lead);
+            return CreatedAtAction(nameof(GetById), new { id = lead.Id }, lead);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] Lead invited)
+        public async Task<IActionResult> Update(int id, [FromBody] Lead lead)
         {
-            if (id != invited.Id)
+            if (id != lead.Id)
                 return BadRequest();
 
-            await _leadService.UpdateAsync(invited);
+            await _leadService.UpdateAsync(lead);
             return NoContent();
         }
 

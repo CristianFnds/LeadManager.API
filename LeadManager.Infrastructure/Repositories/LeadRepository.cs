@@ -53,10 +53,10 @@ namespace LeadManager.Infrastructure.Repositories
 
         public async Task DeleteAsync(int id)
         {
-            var invited = await _context.Leads.FindAsync(id);
-            if (invited != null)
+            var lead = await _context.Leads.FindAsync(id);
+            if (lead != null)
             {
-                _context.Leads.Remove(invited);
+                _context.Leads.Remove(lead);
                 await _context.SaveChangesAsync();
             }
         }

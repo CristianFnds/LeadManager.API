@@ -11,9 +11,9 @@ namespace LeadManager.Application.ApplicationService
 
         private const string emailVendas = "vendas@teste.com";
 
-        public LeadService(ILeadRepository invitedRepository, IEmailService emailService)
+        public LeadService(ILeadRepository leadRepository, IEmailService emailService)
         {
-            _leadRepository = invitedRepository;
+            _leadRepository = leadRepository;
             _emailService = emailService;
         }
 
@@ -26,6 +26,7 @@ namespace LeadManager.Application.ApplicationService
         {
             return await _leadRepository.GetAllInvitedAsync();
         }
+
         public async Task<IEnumerable<Lead>> GetAllAcceptedsAsync()
         {
             return await _leadRepository.GetAllAcceptedsAsync();
@@ -36,14 +37,14 @@ namespace LeadManager.Application.ApplicationService
             return await _leadRepository.GetByIdAsync(id);
         }
 
-        public async Task AddAsync(Lead invited)
+        public async Task AddAsync(Lead lead)
         {
-            await _leadRepository.AddAsync(invited);
+            await _leadRepository.AddAsync(lead);
         }
 
-        public async Task UpdateAsync(Lead invited)
+        public async Task UpdateAsync(Lead lead)
         {
-            await _leadRepository.UpdateAsync(invited);
+            await _leadRepository.UpdateAsync(lead);
         }
 
         public async Task<Lead> AcceptLeadAsync(Lead lead)
