@@ -16,7 +16,7 @@ namespace LeadManager.Domain.Entities
         [Column("created_at")]
         public DateTime DateCreated { get; set; }
         public bool? IsAccepted { get; set; }
-        public Contact Contact { get; set; }
+        public Contact? Contact { get; set; }
 
         public void Accept()
         {
